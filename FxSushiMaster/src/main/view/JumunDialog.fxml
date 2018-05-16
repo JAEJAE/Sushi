@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.SushiDialogController">
+   <children>
+      <ImageView fitHeight="258.0" fitWidth="211.0" layoutX="3.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Image/sushi_counter.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="278.0" prefWidth="275.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="92.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="178.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="주문번호 :">
+               <font>
+                  <Font name="D2Coding Bold" size="13.0" />
+               </font></Label>
+            <Label text="손님번호 :" GridPane.rowIndex="1">
+               <font>
+                  <Font name="D2Coding Bold" size="13.0" />
+               </font></Label>
+            <Label text="테이블번호 :" GridPane.rowIndex="2">
+               <font>
+                  <Font name="D2Coding Bold" size="13.0" />
+               </font></Label>
+            <Label text="초밥번호 :" GridPane.rowIndex="3">
+               <font>
+                  <Font name="D2Coding Bold" size="13.0" />
+               </font></Label>
+            <Label text="초밥개수 :" GridPane.rowIndex="4">
+               <font>
+                  <Font name="D2Coding Bold" size="13.0" />
+               </font></Label>
+            <TextField fx:id="JumunNoFieldj" GridPane.columnIndex="1" />
+            <TextField fx:id="GuestNoFieldj" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="TableNoFieldj" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="SushiNoFieldj" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="SushiCountj" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <ButtonBar layoutX="85.0" layoutY="346.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#handleCancel2" style="-fx-background-color: #D7AC87;" text="Cancel" underline="true" wrapText="true">
+               <font>
+                  <Font name="D2Coding Bold" size="13.0" />
+               </font></Button>
+        </buttons>
+      </ButtonBar>
+    <Button layoutX="211.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleOk2" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #D7AC87;" text="Ok" underline="true" wrapText="true">
+         <font>
+            <Font name="D2Coding Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
