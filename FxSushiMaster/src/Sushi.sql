@@ -1,4 +1,13 @@
 
+delete jumun where jumunno = 1
+delete GUEST where guestno = 1
+delete sushi where sushino=1
+delete store where fishno=1
+
+select * from store;
+select * from SUSHI
+select * from guest
+select * from jumun
 -- 가게
 create table Store(
 
@@ -11,7 +20,7 @@ fishNo varchar2(10) primary key
 
 -- 스시 
 select * from sushi
-delete sushi where sushino=1
+
 create table Sushi(
 
 sushiNo varchar2(10)	primary key
@@ -55,7 +64,7 @@ guestNo varchar2(10) primary key
  */
 
 select * from STORE
-delete store where fishno = 1
+
 -- 가게의 테이블 생성 (no.1~2)
 
 -- 연어의 재료량을 보여주기 위한 테이블 설정

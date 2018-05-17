@@ -43,7 +43,8 @@
 		, sushiCount)
 		values(
 		#{jumunNo}
-		, #{guestNo}
+		,
+		#{guestNo}
 		, #{tableNo}
 		, #{sushiNo}
 		, #{sushiCount}
@@ -52,18 +53,52 @@
 
 	</insert>
 
-	<select id="insertGuest" parameterType="Guest">
+	<insert id="insertGuest" parameterType="Guest">
 		insert into Guest(
 		guestNo
-		, tableNo
-		, cost)
-		values{
+		, tableNo)
+		values(
 		#{guestNo}
 		, #{tableNo}
-		, #{cost}
-		}
+		)
 
-	</select>
+	</insert>
+
+	<delete id="deleteJumun" parameterType="String">
+		delete from Jumun
+		where
+		jumunNo = #{jumunNo}
+	</delete>
+	<delete id="deleteGuest" parameterType="String">
+		delete from Guest
+		where
+		guestNo = #{guestNo}
+	</delete>
+	<delete id="deleteSushi" parameterType="String">
+		delete from Sushi
+		where
+		sushiNo = #{sushiNo}
+	</delete>
+	<delete id="deleteStore" parameterType="String">
+		delete from Store
+		where
+		fishNo = #{fishNo}
+	</delete>
+	
+	 <update id="updateCost" parameterType="Guest">
+      update Guest set
+      tableNo = #{tableNo}
+      ,cost = #{cost}
+      where guestNo = #{guestNo}
+   </update>
+	
+	<update id="updateSales" parameterType="Store">
+		update Store set
+		fishAmount = #{fishAmount}
+		,tableNo = #{tableNo}
+		,totalSales = #{totalSales}
+		where fishNo = #{fishNo}
+	</update>
 
 
 </mapper>

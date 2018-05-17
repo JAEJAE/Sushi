@@ -38,6 +38,8 @@ public class Main extends Application {
 	private ObservableList<StoreVO> storeData = FXCollections.observableArrayList();
 	public ArrayList<SushiVO> sushiList= new ArrayList<>();
 	public ArrayList<GuestVO> guestList = new ArrayList<>();
+	public ArrayList<StoreVO> storeList = new ArrayList<>();
+	
 
 	
 	//
@@ -66,6 +68,12 @@ public class Main extends Application {
 			guestList.add(guestData.get(i));
 		}
 		return guestList;
+	}
+	public ArrayList<StoreVO> storeList(){
+		for(int i=0;i<storeData.size();i++) {
+			storeList.add(storeData.get(i));
+		}
+		return storeList;
 	}
 	
 	public void printList() {//디버깅용 출력

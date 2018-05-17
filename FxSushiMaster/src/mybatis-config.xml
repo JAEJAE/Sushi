@@ -9,8 +9,8 @@
 	<typeAliases>
 		<typeAlias type="main.vo.SushiVODB" alias="Sushi" />
 		<typeAlias type="main.vo.StoreVODB" alias="Store" />
-		<typeAlias type="main.vo.GuestVO" alias="Guest" />
-		<typeAlias type="main.vo.JumunVO" alias="Jumun" />
+		<typeAlias type="main.vo.GuestVODB" alias="Guest" />
+		<typeAlias type="main.vo.JumunVODB" alias="Jumun" />
 		<!-- <typeAlias type="user.vo.User" alias="User" /> -->
 		<!-- 시험에서는 여기에 db property 추가하는거 나올수 도 있음 -->
 	</typeAliases>

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.vo.GuestVO;
+import main.vo.GuestVODB;
 import main.vo.JumunVO;
 import main.vo.JumunVODB;
 import main.vo.StoreVO;
@@ -172,6 +173,11 @@ public class SushiDialogController {
 					// 여기 sdc.guest를 List에 추가해줘야해
 					okClicked = true;
 					dialogStage.close();
+					GuestVODB guestDB = new GuestVODB();
+					guestDB.setGuestNo(sdc.GuestNoFieldg.getText());
+					guestDB.setTableNo(sdc.TableNOFieldg.getText());
+					System.out.println(guestDB);
+					dao.insertGuest(guestDB);
 				}
 			}
 		});

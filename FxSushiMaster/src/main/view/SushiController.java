@@ -1,7 +1,13 @@
 package main.view;
 
 import java.util.ArrayList;
-
+/*Platform.runLater(new Runnable() {
+	@Override
+	public void run() {
+		
+	}
+});*/
+import DAO.SushiDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,11 +17,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.Main;
 import main.vo.GuestVO;
+import main.vo.GuestVODB;
 import main.vo.JumunVO;
 import main.vo.StoreVO;
+import main.vo.StoreVODB;
 import main.vo.SushiVO;
 
 public class SushiController {
+	SushiDAO dao = new SushiDAO();
 	@FXML
 	private TableView<SushiVO> sushiTable;
 	@FXML
@@ -86,9 +95,23 @@ public class SushiController {
 
 	// 매인 앱 참조
 	private Main main;
-	JumunVO jumun;
-	GuestVO guest;
-	StoreVO store;
+	
+	public JumunVO jumun;
+	public GuestVO guest;
+	public StoreVO storebefore;
+	public StoreVODB storeDB;
+	public GuestVODB guestDB;
+	public String fishInDB;
+	public String countDB;
+	public String tableNumber;
+	public String totalAmountDB;
+	public String currentAmountDB;
+	public String fishNoDB;
+	public String guestNoDB;
+	public String jumunNoDB;
+	public String sushiNoDB;
+	public int total;
+	public int Aamount;
 	// 생성자
 	public SushiController() {
 
@@ -217,8 +240,10 @@ public class SushiController {
 	public void deleteSushi() {
 		int selectedIndex = sushiTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
+			System.out.println(sushiTable.getItems().get(selectedIndex).getSushiNo());//
 			sushiTable.getItems().remove(selectedIndex);
-			main.printList();
+			sushiNoDB = sushiTable.getItems().get(selectedIndex).getSushiNo();
+			dao.deleteSushi(sushiNoDB);
 		}
 	}
 
@@ -241,7 +266,8 @@ public class SushiController {
 		int selectedIndex = guestTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			guestTable.getItems().remove(selectedIndex);
-			main.printList();
+			guestNoDB = guestTable.getItems().get(selectedIndex).getGuestNo();
+			dao.deleteGuest(guestNoDB);
 		}
 	}
 
@@ -261,6 +287,8 @@ public class SushiController {
 		int selectedIndex = jumunTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			jumunTable.getItems().remove(selectedIndex);
+			jumunNoDB = jumunTable.getItems().get(selectedIndex).getJumunNo();
+			dao.deleteJumun(jumunNoDB);
 			// main.printList();
 		}
 	}
@@ -281,7 +309,9 @@ public class SushiController {
 		int selectedIndex = storeTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			storeTable.getItems().remove(selectedIndex);
-			// main.printList();
+			fishNoDB = storeTable.getItems().get(selectedIndex).getFishNo();
+			dao.deleteStore(fishNoDB);
+
 		}
 	}
 
@@ -296,23 +326,27 @@ public class SushiController {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////// sushiDAO
-	
-	String totaltotal;
+	public String tableNo;
+	public String totaltotal;
+	public String totalamount;
 	@FXML
 	public void selectCost() {
 		jumun = new JumunVO();
 		guest = new GuestVO();
-		store = new StoreVO();
+		guestDB = new GuestVODB();
 		int selectedIndex = guestTable.getSelectionModel().getSelectedIndex();
 		jumun = jumunTable.getSelectionModel().getSelectedItem();
-		String guestId = jumun.getGuestNo();
+		tableNo = jumun.getTableNo();
+		tableNumber = tableNo;
 		String sushiId = jumun.getSushiNo();
-		int count = Integer.parseInt(jumun.getSushiCount());
-		String sushiPrice = null;
+		String sushiCount = jumun.getSushiCount();
+		int count = Integer.parseInt(sushiCount);
+		countDB=sushiCount;
 		int price = 0;
 		int cost = 0;
-		int total=0;
+		total=0;
 		String ccost = null;
+		String sushiPrice = null;
 		//
 		ArrayList<SushiVO> sushiPriceList = main.sushiList();
 		ArrayList<GuestVO> guestPriceList = main.guestList();
@@ -320,38 +354,57 @@ public class SushiController {
 		for (int i = 0; i < sushiPriceList.size(); i++) {
 			if (sushiId.equals(sushiPriceList.get(i).getSushiNo())) {
 				sushiPrice = sushiPriceList.get(i).getSushiPrice();
+				
+				fishInDB = sushiPriceList.get(i).getFishIn();
 				price = Integer.parseInt(sushiPrice);
 				cost = price * count;
 				total+=cost;
+				System.out.println("총 수익:"+total);
 				ccost = cost + "";
 				guestPriceList.get(i).setCost(ccost);
 				guest = guestPriceList.get(i);
 			}
 		}
-		//main.getGuestVOData().set(selectedIndex, guest);
+		//main.getGuestVOData().set(selectedIndex, guest);// sql로 구현해서 update시켜야
 		totaltotal = total+"";
-		store.setTotalSales(totaltotal);
-		//main.getStoreVOData().set(0, store);
-		System.out.println(ccost);
-		System.out.println(guest);
-		System.out.println(totaltotal);
-		// db 전달하고 ccost를 창으로 띄워주면됌
-
-		// costLabelg.setText(guest.getCost());
+		guestDB.setGuestNo(guest.getGuestNo());
+		guestDB.setTableNo(tableNumber);
+		guestDB.setCost(guest.getCost());
+		
+		System.out.println(guestDB);
+		dao.updateCost(guestDB);
+	
 		///////////////////////////////////////////////// cost 구했음+넣었음
 	}
 
 	@FXML
 	public void selectStore() {
-		store = new StoreVO();
-		int total = 0;
-		int selectedIndex = storeTable.getSelectionModel().getSelectedIndex();
-		store = storeTable.getSelectionModel().getSelectedItem();
-		store.setTotalSales(totaltotal);
-		System.out.println(selectedIndex);
-		System.out.println(store);
+		storebefore = new StoreVO();
+		storeDB = new StoreVODB();
+		
+		storebefore = storeTable.getSelectionModel().getSelectedItem();
+		currentAmountDB = storebefore.getFishAmount();
+		int c= Integer.parseInt(countDB);
+		int f = Integer.parseInt(fishInDB);
+		Aamount = Integer.parseInt(currentAmountDB);
+		System.out.println("aamount"+Aamount);
+		int Usage = Aamount-(c*f);
+		System.out.println();
+		
+		totalAmountDB=Usage+"";
+		storeDB.setFishNo(storebefore.getFishNo());
+		storeDB.setFishAmount(totalAmountDB);
+		storeDB.setTableNo(tableNumber);
+		storeDB.setTotalSales(totaltotal);
+
+		System.out.println(storebefore);
+		System.out.println(storeDB);
 		System.out.println(totaltotal);
+		
+		dao.updateSales(storeDB);
+		
 		/////////////////////////////////////////////전체매출 구하기
 	}
+	
 
 }
