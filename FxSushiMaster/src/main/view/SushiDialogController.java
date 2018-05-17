@@ -1,15 +1,21 @@
 package main.view;
 
+import DAO.SushiDAO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.vo.GuestVO;
 import main.vo.JumunVO;
+import main.vo.JumunVODB;
 import main.vo.StoreVO;
+import main.vo.StoreVODB;
 import main.vo.SushiVO;
+import main.vo.SushiVODB;
 
 public class SushiDialogController {
+	SushiDAO dao = new SushiDAO();
 	@FXML
 	private TextField SushiNoField;
 	@FXML
@@ -27,6 +33,8 @@ public class SushiDialogController {
 	private TextField GuestNoFieldg;
 	@FXML
 	private TextField TableNOFieldg;
+	@FXML
+	private Label CostLabelg;
 	///////////////////////////////////////////guestVO
 	@FXML
 	private TextField JumunNoFieldj;
@@ -123,7 +131,8 @@ public class SushiDialogController {
 			@Override
 			public void run() {
 				if (inputValid()) {
-					sushi.setSushiNo(sdc.SushiNoField.getText());// sushiVO에 컨트롤의 sds.SushiVO를 넣는거다
+					String sushiNO = sdc.SushiNoField.getText();
+					sushi.setSushiNo(sushiNO);// sushiVO에 컨트롤의 sds.SushiVO를 넣는거다
 					sushi.setSushiName(sdc.SushiNameField.getText());
 					sushi.setSushiPrice(sdc.SushiPriceField.getText());
 					sushi.setFishNo(sdc.FishNoField.getText());
@@ -132,6 +141,15 @@ public class SushiDialogController {
 					// 여기 sdc.sushi를 List에 추가해줘야해
 					okClicked = true;
 					dialogStage.close();
+					SushiVODB sushiDB = new SushiVODB();
+					sushiDB.setSushiNo(sushiNO);
+					sushiDB.setSushiName(sdc.SushiNameField.getText());
+					sushiDB.setSushiPrice(sdc.SushiPriceField.getText());
+					sushiDB.setFishNo(sdc.FishNoField.getText());
+					sushiDB.setFishName(sdc.FishNameField.getText());
+					sushiDB.setFishIn(sdc.FishInField.getText());
+					System.out.println(sushiDB);
+					dao.insertSushi(sushiDB);
 				}
 			}
 		});
@@ -179,6 +197,14 @@ public class SushiDialogController {
 					// 여기 sdc.guest를 List에 추가해줘야해
 					okClicked = true;
 					dialogStage.close();
+					JumunVODB jumunDB = new JumunVODB();
+					jumunDB.setJumunNo(sdc.JumunNoFieldj.getText());
+					jumunDB.setGuestNo(sdc.GuestNoFieldj.getText());
+					jumunDB.setTableNo(sdc.TableNoFieldj.getText());
+					jumunDB.setSushiNo(sdc.SushiNoFieldj.getText());
+					jumunDB.setSushiCount(sdc.SushiCountj.getText());
+					dao.insertJumun(jumunDB);
+					System.out.println(jumunDB);
 				}
 			}
 		});
@@ -199,6 +225,11 @@ public class SushiDialogController {
 					// 여기 sdc.guest를 List에 추가해줘야해
 					okClicked = true;
 					dialogStage.close();
+					StoreVODB store = new StoreVODB();
+					store.setFishNo(sdc.FishNoFields.getText());
+					store.setFishAmount(sdc.FishAmounts.getText());
+					System.out.println(store);
+					dao.insertStore(store);
 				}
 			}
 		});

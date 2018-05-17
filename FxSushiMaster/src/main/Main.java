@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,13 +30,18 @@ public class Main extends Application {
 	private AnchorPane guestdialog;
 	private AnchorPane jumundialog;
 	private AnchorPane storedialog;
+	private AnchorPane costdialog;
 	// data ObservableList
 	private ObservableList<SushiVO> sushiData = FXCollections.observableArrayList();
 	private ObservableList<GuestVO> guestData = FXCollections.observableArrayList();
 	private ObservableList<JumunVO> jumunData = FXCollections.observableArrayList();
 	private ObservableList<StoreVO> storeData = FXCollections.observableArrayList();
+	public ArrayList<SushiVO> sushiList= new ArrayList<>();
+	public ArrayList<GuestVO> guestList = new ArrayList<>();
+
+	
 	//
-	public ObservableList<SushiVO> getSuchiVOData() {
+	public ObservableList<SushiVO> getSushiVOData() {
 		return sushiData;
 	}
 	public ObservableList<GuestVO> getGuestVOData(){
@@ -47,8 +54,22 @@ public class Main extends Application {
 		return storeData;
 	}
 	//
+	public ArrayList<SushiVO> sushiList() {
+		for(int i=0;i<sushiData.size();i++) {
+			sushiList.add(sushiData.get(i));
+			//list전달확인
+		}
+		return sushiList;
+	}
+	public ArrayList<GuestVO> guestList(){
+		for(int i=0;i<guestData.size();i++) {
+			guestList.add(guestData.get(i));
+		}
+		return guestList;
+	}
+	
 	public void printList() {//디버깅용 출력
-		System.out.println(sushiData);
+		System.out.println(sushiData); 
 		System.out.println(guestData);
 		System.out.println(jumunData);
 		System.out.println(storeData);
@@ -189,6 +210,28 @@ public class Main extends Application {
 			SushiDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			controller.setStore(store);
+			dialogStage.showAndWait();
+			return controller.isOkClicked();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean showCostDialog(GuestVO guest) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/CostDialog.fxml"));
+			costdialog = (AnchorPane) loader.load();
+			dialogStage = new Stage();
+			dialogStage.setTitle("Store Info");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(costdialog);
+			dialogStage.setScene(scene);
+			SushiDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setGuest(guest);
 			dialogStage.showAndWait();
 			return controller.isOkClicked();
 		} catch (Exception e) {

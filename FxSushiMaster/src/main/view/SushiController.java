@@ -1,5 +1,7 @@
 package main.view;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -84,8 +86,9 @@ public class SushiController {
 
 	// 매인 앱 참조
 	private Main main;
-
-	//
+	JumunVO jumun;
+	GuestVO guest;
+	StoreVO store;
 	// 생성자
 	public SushiController() {
 
@@ -127,7 +130,7 @@ public class SushiController {
 	// controller.setMainApp(this);
 	public void setMain(Main main) {
 		this.main = main;
-		sushiTable.setItems(main.getSuchiVOData());
+		sushiTable.setItems(main.getSushiVOData());
 		guestTable.setItems(main.getGuestVOData());
 		jumunTable.setItems(main.getJumunVOData());
 		storeTable.setItems(main.getStoreVOData());
@@ -176,6 +179,7 @@ public class SushiController {
 		} else {
 			guestNoLabelg.setText("");
 			tableNoLabelg.setText("");
+			
 		}
 	}
 
@@ -223,7 +227,7 @@ public class SushiController {
 		SushiVO sushi = new SushiVO();
 		boolean okClicked = main.showSushiDialog(sushi);
 		if (okClicked) {
-			main.getSuchiVOData().add(sushi);
+			main.getSushiVOData().add(sushi);
 			main.printList();
 			// add가 동작하는지확인하면 스시가 추가되는지 확인해볼 수 있네
 		}
@@ -289,6 +293,65 @@ public class SushiController {
 			main.getStoreVOData().add(store);
 			main.printList();
 		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////// sushiDAO
+	
+	String totaltotal;
+	@FXML
+	public void selectCost() {
+		jumun = new JumunVO();
+		guest = new GuestVO();
+		store = new StoreVO();
+		int selectedIndex = guestTable.getSelectionModel().getSelectedIndex();
+		jumun = jumunTable.getSelectionModel().getSelectedItem();
+		String guestId = jumun.getGuestNo();
+		String sushiId = jumun.getSushiNo();
+		int count = Integer.parseInt(jumun.getSushiCount());
+		String sushiPrice = null;
+		int price = 0;
+		int cost = 0;
+		int total=0;
+		String ccost = null;
+		//
+		ArrayList<SushiVO> sushiPriceList = main.sushiList();
+		ArrayList<GuestVO> guestPriceList = main.guestList();
+		//
+		for (int i = 0; i < sushiPriceList.size(); i++) {
+			if (sushiId.equals(sushiPriceList.get(i).getSushiNo())) {
+				sushiPrice = sushiPriceList.get(i).getSushiPrice();
+				price = Integer.parseInt(sushiPrice);
+				cost = price * count;
+				total+=cost;
+				ccost = cost + "";
+				guestPriceList.get(i).setCost(ccost);
+				guest = guestPriceList.get(i);
+			}
+		}
+		//main.getGuestVOData().set(selectedIndex, guest);
+		totaltotal = total+"";
+		store.setTotalSales(totaltotal);
+		//main.getStoreVOData().set(0, store);
+		System.out.println(ccost);
+		System.out.println(guest);
+		System.out.println(totaltotal);
+		// db 전달하고 ccost를 창으로 띄워주면됌
+
+		// costLabelg.setText(guest.getCost());
+		///////////////////////////////////////////////// cost 구했음+넣었음
+	}
+
+	@FXML
+	public void selectStore() {
+		store = new StoreVO();
+		int total = 0;
+		int selectedIndex = storeTable.getSelectionModel().getSelectedIndex();
+		store = storeTable.getSelectionModel().getSelectedItem();
+		store.setTotalSales(totaltotal);
+		System.out.println(selectedIndex);
+		System.out.println(store);
+		System.out.println(totaltotal);
+		/////////////////////////////////////////////전체매출 구하기
 	}
 
 }
