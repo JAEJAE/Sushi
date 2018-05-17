@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- DB접속정보 값을 가지고 있는 파일 설정 -->
+	<properties resource="db.properties" />
+
+	<!-- Java Class에 대한 alias 지정으로 간편하게 vo(db property)에 접근함 -->
+	<typeAliases>
+		<typeAlias type="main.vo.SushiVODB" alias="Sushi" />
+		<typeAlias type="main.vo.StoreVODB" alias="Store" />
+		<typeAlias type="main.vo.GuestVO" alias="Guest" />
+		<typeAlias type="main.vo.JumunVO" alias="Jumun" />
+		<!-- <typeAlias type="user.vo.User" alias="User" /> -->
+		<!-- 시험에서는 여기에 db property 추가하는거 나올수 도 있음 -->
+	</typeAliases>
+
+	<!-- DB접속 정보 셋팅 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments><!-- DB접속 정보 입력하는거 시험에 나올 수 있다. -->
+
+	<!-- Mapper 파일 include, Mapper 정보 등록 -->
+	<mappers>
+		<mapper resource="SushiMapper.xml" />
+		<!-- <mapper resource="userMapper.xml" /> -->
+		<!-- mapper 채우는거 시험에 나올 수 있다 -->
+	</mappers>
+
+</configuration>

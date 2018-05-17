@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="300.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.SushiController">
+   <children>
+      <Label layoutX="81.0" layoutY="37.0" text="&lt;영 수 증 &gt;" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="55.0" />
+      <Label fx:id="costLabelg" layoutX="107.0" layoutY="261.0" text="Label" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="54.5" />
+      <Label layoutX="69.0" layoutY="267.0" text="가격 :" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="100.0" />
+      <Label layoutX="147.0" layoutY="267.0" text="원" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Line endX="100.0" layoutX="100.0" layoutY="250.0" startX="-100.0" />
+   </children>
+</AnchorPane>

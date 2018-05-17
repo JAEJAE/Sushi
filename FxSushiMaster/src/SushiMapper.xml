@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- java 메소드명과 id가 같으면 sql 동작함 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper.java == mapper.xml은 한쌍 -->
+<!-- mapper의 몸체 SQL 수행, db에 접근함 -->
+<mapper namespace="DAO.SushiMapper">
+
+	<insert id="insertSushi" parameterType="Sushi">
+		insert into sushi(
+		sushiNo,
+		sushiName,
+		sushiPrice,
+		fishNo,
+		fishName,
+		fishIn)
+		values(
+		#{sushiNo},
+		#{sushiName},
+		#{sushiPrice},
+		#{fishNo},
+		#{fishName},
+		#{fishIn}
+		)
+	</insert>
+
+	<insert id="insertStore" parameterType="Store">
+		insert into store(
+		fishNo,
+		fishAmount
+		)values(
+		#{fishNo},
+		#{fishAmount}
+		)
+	</insert>
+
+	<insert id="insertJumun" parameterType="Jumun">
+		insert into Jumun(
+		jumunNo
+		, guestNo
+		, tableNo
+		, sushiNo
+		, sushiCount)
+		values(
+		#{jumunNo}
+		, #{guestNo}
+		, #{tableNo}
+		, #{sushiNo}
+		, #{sushiCount}
+
+		)
+
+	</insert>
+
+	<select id="insertGuest" parameterType="Guest">
+		insert into Guest(
+		guestNo
+		, tableNo
+		, cost)
+		values{
+		#{guestNo}
+		, #{tableNo}
+		, #{cost}
+		}
+
+	</select>
+
+
+</mapper>

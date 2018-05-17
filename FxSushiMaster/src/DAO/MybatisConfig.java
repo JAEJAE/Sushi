@@ -1,0 +1,31 @@
+package DAO;
+
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+public class MybatisConfig {
+	private static SqlSessionFactory sqlSessionFactory;//딱 한번 만 만들어서 dao에서 돌려서서 사용한다.
+
+	static {
+		String resource = "mybatis-config.xml";		//Mybatis 환경설정 파일 읽기. src 경로에 저장.
+		//dao에 세션을 열어주는 역할
+
+		try {
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
+		
+		
+	}
+}
+
