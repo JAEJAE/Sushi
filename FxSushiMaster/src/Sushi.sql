@@ -2,7 +2,7 @@
 delete jumun where jumunno = 1
 delete GUEST where guestno = 1
 delete sushi where sushino=1
-delete store where fishno=1
+delete store where fishno=2
 
 select * from store;
 select * from SUSHI

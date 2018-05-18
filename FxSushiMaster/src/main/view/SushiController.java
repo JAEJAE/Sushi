@@ -1,6 +1,8 @@
 package main.view;
 
 import java.util.ArrayList;
+import java.util.concurrent.SynchronousQueue;
+
 /*Platform.runLater(new Runnable() {
 	@Override
 	public void run() {
@@ -333,48 +335,58 @@ public class SushiController {
 	public String totalamount;
 	@FXML
 	public void selectCost() {
-		jumun = new JumunVO();
-		guest = new GuestVO();
-		guestDB = new GuestVODB();
-		int selectedIndex = guestTable.getSelectionModel().getSelectedIndex();
-		jumun = jumunTable.getSelectionModel().getSelectedItem();
-		tableNo = jumun.getTableNo();
-		tableNumber = tableNo;
-		String sushiId = jumun.getSushiNo();
-		String sushiCount = jumun.getSushiCount();
-		int count = Integer.parseInt(sushiCount);
-		countDB=sushiCount;
-		int price = 0;
-		int cost = 0;
-		total=0;
-		String ccost = null;
-		String sushiPrice = null;
-		//
-		ArrayList<SushiVO> sushiPriceList = main.sushiList();
-		ArrayList<GuestVO> guestPriceList = main.guestList();
-		//
-		for (int i = 0; i < sushiPriceList.size(); i++) {
-			if (sushiId.equals(sushiPriceList.get(i).getSushiNo())) {
-				sushiPrice = sushiPriceList.get(i).getSushiPrice();
-				
-				fishInDB = sushiPriceList.get(i).getFishIn();
-				price = Integer.parseInt(sushiPrice);
-				cost = price * count;
-				total+=cost;
-				System.out.println("총 수익:"+total);
-				ccost = cost + "";
-				guestPriceList.get(i).setCost(ccost);
-				guest = guestPriceList.get(i);
+		Platform.runLater(new Runnable() {
+		@Override
+		public void run() {
+			jumun = new JumunVO();
+			guest = new GuestVO();
+			guestDB = new GuestVODB();
+			int selectedIndex = guestTable.getSelectionModel().getSelectedIndex();
+			jumun = jumunTable.getSelectionModel().getSelectedItem();
+			tableNo = jumun.getTableNo();
+			tableNumber = tableNo;
+			String guestnumber = jumun.getGuestNo();
+			String sushiId = jumun.getSushiNo();
+			String sushiCount = jumun.getSushiCount();
+			System.out.println(jumun.getGuestNo()+""+jumun.getSushiNo()+""+jumun.getSushiCount());
+			int count = Integer.parseInt(sushiCount);
+			countDB=sushiCount;
+			
+			int price = 0;
+			int cost = 0;
+			total=0;
+			String ccost = null;
+			String sushiPrice = null;
+			//
+			ArrayList<SushiVO> sushiPriceList = main.sushiList();
+			ArrayList<GuestVO> guestPriceList = main.guestList();
+			//
+			for (int i = 0; i < sushiPriceList.size(); i++) {
+				if (sushiId.equals(sushiPriceList.get(i).getSushiNo())) {
+					sushiPrice = sushiPriceList.get(i).getSushiPrice();
+					fishInDB = sushiPriceList.get(i).getFishIn();
+					price = Integer.parseInt(sushiPrice);
+					System.out.println("초밥개당가격"+price);
+					cost = price * count;
+					total=cost;
+					System.out.println("총 수익:"+total);
+					ccost = cost + "";
+					System.out.println("db에 들어가는 수익"+ccost);
+					//guestPriceList.get(i).setCost(ccost);
+					//guest = guestPriceList.get(i);
+				}
 			}
+			//main.getGuestVOData().set(selectedIndex, guest);// sql로 구현해서 update시켜야
+			totaltotal = total+"";
+			guestDB.setGuestNo(guestnumber);
+			guestDB.setTableNo(tableNumber);
+			guestDB.setCost(ccost);
+			
+			System.out.println(guestDB);
+			dao.updateCost(guestDB);
 		}
-		//main.getGuestVOData().set(selectedIndex, guest);// sql로 구현해서 update시켜야
-		totaltotal = total+"";
-		guestDB.setGuestNo(guest.getGuestNo());
-		guestDB.setTableNo(tableNumber);
-		guestDB.setCost(guest.getCost());
+	});
 		
-		System.out.println(guestDB);
-		dao.updateCost(guestDB);
 	
 		///////////////////////////////////////////////// cost 구했음+넣었음
 	}
