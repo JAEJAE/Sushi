@@ -122,7 +122,16 @@ public class SushiDialogController {
 	// cancle누르면 스테이지 종료
 	@FXML
 	private void handleCancel() {
-		dialogStage.close();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inputValid()) {
+					System.out.println(sdc.SushiNoField.getText());
+					dao.deleteSushi(sdc.SushiNoField.getText());
+					dialogStage.close();
+				}
+			}
+		});
 	}
 
 	// ok누르면 값들어간당
@@ -158,7 +167,16 @@ public class SushiDialogController {
 //////////////////////////////////////////////////////////////////////////////////sushi 버튼
 	@FXML
 	private void handleCancel1() {
-		dialogStage.close();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inputValid()) {
+					System.out.println(sdc.GuestNoFieldg.getText());
+					dao.deleteGuest(sdc.GuestNoFieldg.getText());
+					dialogStage.close();
+				}
+			}
+		});
 	}
 
 	// ok누르면 값들어간당
@@ -185,7 +203,16 @@ public class SushiDialogController {
 	/////////////////////////////////////////////////////////////////////////////////////////////////guest다이얼로그 버튼
 	@FXML
 	private void handleCancel2() {
-		dialogStage.close();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inputValid()) {
+					System.out.println(sdc.JumunNoFieldj.getText());
+					dao.deleteJumun(sdc.JumunNoFieldj.getText());
+					dialogStage.close();
+				}
+			}
+		});
 	}
 
 	// ok누르면 값들어간당
@@ -218,7 +245,16 @@ public class SushiDialogController {
 	/////////////////////////////////////////////////////////////////////////////////////////////////jumun다이얼로그 버튼
 	@FXML
 	private void handleCancel3() {
-		dialogStage.close();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inputValid()) {
+					System.out.println(sdc.FishNoFields.getText());
+					dao.deleteStore(sdc.FishNoFields.getText());
+					dialogStage.close();
+				}
+			}
+		});
 	}
 	@FXML
 	private void handleOk3() {

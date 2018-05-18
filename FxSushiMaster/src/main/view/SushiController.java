@@ -19,6 +19,7 @@ import main.Main;
 import main.vo.GuestVO;
 import main.vo.GuestVODB;
 import main.vo.JumunVO;
+import main.vo.JumunVODB;
 import main.vo.StoreVO;
 import main.vo.StoreVODB;
 import main.vo.SushiVO;
@@ -101,6 +102,7 @@ public class SushiController {
 	public StoreVO storebefore;
 	public StoreVODB storeDB;
 	public GuestVODB guestDB;
+	public JumunVODB jumunDB;
 	public String fishInDB;
 	public String countDB;
 	public String tableNumber;
@@ -243,7 +245,7 @@ public class SushiController {
 			System.out.println(sushiTable.getItems().get(selectedIndex).getSushiNo());//
 			sushiTable.getItems().remove(selectedIndex);
 			sushiNoDB = sushiTable.getItems().get(selectedIndex).getSushiNo();
-			dao.deleteSushi(sushiNoDB);
+			//dao.deleteSushi(sushiNoDB);
 		}
 	}
 
@@ -267,7 +269,7 @@ public class SushiController {
 		if (selectedIndex >= 0) {
 			guestTable.getItems().remove(selectedIndex);
 			guestNoDB = guestTable.getItems().get(selectedIndex).getGuestNo();
-			dao.deleteGuest(guestNoDB);
+			//dao.deleteGuest(guestNoDB);
 		}
 	}
 
@@ -286,9 +288,9 @@ public class SushiController {
 	public void deleteJumun() {
 		int selectedIndex = jumunTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
-			jumunTable.getItems().remove(selectedIndex);
 			jumunNoDB = jumunTable.getItems().get(selectedIndex).getJumunNo();
-			dao.deleteJumun(jumunNoDB);
+			//dao.deleteJumun(jumunNoDB);
+			jumunTable.getItems().remove(selectedIndex);
 			// main.printList();
 		}
 	}
@@ -310,7 +312,7 @@ public class SushiController {
 		if (selectedIndex >= 0) {
 			storeTable.getItems().remove(selectedIndex);
 			fishNoDB = storeTable.getItems().get(selectedIndex).getFishNo();
-			dao.deleteStore(fishNoDB);
+			//dao.deleteStore(fishNoDB);
 
 		}
 	}
