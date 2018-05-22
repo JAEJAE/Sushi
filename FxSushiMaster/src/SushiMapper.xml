@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?><!-- java 메소드명과 id가 같으면 sql 동작함 -->
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- mapper.java == mapper.xml은 한쌍 -->
-<!-- mapper의 몸체 SQL 수행, db에 접근함 -->
+
 <mapper namespace="DAO.SushiMapper">
 
 	<insert id="insertSushi" parameterType="Sushi">
@@ -43,8 +42,7 @@
 		, sushiCount)
 		values(
 		#{jumunNo}
-		,
-		#{guestNo}
+		,#{guestNo}
 		, #{tableNo}
 		, #{sushiNo}
 		, #{sushiCount}
@@ -59,8 +57,7 @@
 		, tableNo)
 		values(
 		#{guestNo}
-		, #{tableNo}
-		)
+		, #{tableNo})
 
 	</insert>
 
@@ -69,21 +66,26 @@
 		where
 		jumunNo = #{jumunNo}
 	</delete>
+	
 	<delete id="deleteGuest" parameterType="String">
 		delete from Guest
 		where
 		guestNo = #{guestNo}
 	</delete>
+	
 	<delete id="deleteSushi" parameterType="String">
 		delete from Sushi
 		where
 		sushiNo = #{sushiNo}
 	</delete>
+	
 	<delete id="deleteStore" parameterType="String">
 		delete from Store
 		where
 		fishNo = #{fishNo}
 	</delete>
+	
+	
 	
 	 <update id="updateCost" parameterType="Guest">
       update Guest set

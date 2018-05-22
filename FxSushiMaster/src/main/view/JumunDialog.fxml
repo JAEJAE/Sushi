@@ -61,13 +61,13 @@
       </GridPane>
       <ButtonBar layoutX="85.0" layoutY="346.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#handleCancel2" style="-fx-background-color: #D7AC87;" text="Cancel" underline="true" wrapText="true">
+            <Button mnemonicParsing="false" onAction="#handleCancel2" style="-fx-background-color: #D7AC87;" text="Delete" underline="true" wrapText="true">
                <font>
                   <Font name="D2Coding Bold" size="13.0" />
                </font></Button>
         </buttons>
       </ButtonBar>
-    <Button layoutX="211.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleOk2" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #D7AC87;" text="Ok" underline="true" wrapText="true">
+    <Button layoutX="211.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleOk2" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #D7AC87;" text="Create" underline="true" wrapText="true">
          <font>
             <Font name="D2Coding Bold" size="13.0" />
          </font>

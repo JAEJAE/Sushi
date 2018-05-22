@@ -52,7 +52,9 @@ public class SushiController {
 	TableColumn<StoreVO, String> fishNoColums;
 	@FXML
 	TableColumn<StoreVO, String> fishAmount;
-	///////////////////////////////////////////////////////
+	
+	/////////////////////////////////////// 스시정보 라벨
+	
 	@FXML
 	private Label sushiNoLabel;
 	@FXML
@@ -65,12 +67,16 @@ public class SushiController {
 	private Label fishNameLabel;
 	@FXML
 	private Label fishInLabel;
-	/////////////////////////////////////// 스시창 라벨
+	
+	/////////////////////////////////////// 손님정보 라벨
+	
 	@FXML
 	private Label guestNoLabelg;
 	@FXML
 	private Label tableNoLabelg;
-	///////////////////////////// 손님정보 라벨
+	
+	/////////////////////////////////////// 주문정보 라벨
+
 	@FXML
 	private Label jumunNoLabel;
 	@FXML
@@ -81,14 +87,14 @@ public class SushiController {
 	private Label sushiNoLabelj;
 	@FXML
 	private Label sushiCountLabel;
-	///////////////////////////// 주문정보 라벨
+
+	/////////////////////////////////////// 가게 라벨
 	@FXML
 	private Label fishNoLabels;
 	@FXML
 	private Label fishAmountLabels;
 
-	///////////////////////////// 가게 라벨
-	///////////////////////////////////////
+
 	@FXML
 	private SplitPane sushi1;
 	@FXML
@@ -116,6 +122,7 @@ public class SushiController {
 	public String sushiNoDB;
 	public int total;
 	public int Aamount;
+	
 	// 생성자
 	public SushiController() {
 
@@ -124,13 +131,13 @@ public class SushiController {
 	// initialize() 메서드는 fxml 파일이 로드되고 나서 자동으로 호출. 그러면 모든 FXML 필드가 초기화.
 	@FXML
 	private void initialize() {
-		// sushi초기화
+		// SUSHI 초기화
 		sushiNoColumn.setCellValueFactory(cellData -> cellData.getValue().SushiNoProperty());
 		sushiNameColumn.setCellValueFactory(cellData -> cellData.getValue().SushiNameProperty());
-		// 손님 초기화
+		// GUEST 초기화
 		guestNoColumn.setCellValueFactory(cellData -> cellData.getValue().GuestNoProperty());
 		TableNoColumng.setCellValueFactory(cellData -> cellData.getValue().TableNoProperty());
-		// 주문 초기화
+		// JUMUN 초기화
 		jumunNoColumn.setCellValueFactory(cellData -> cellData.getValue().JumunNoProperty());
 		TableNoColumnj.setCellValueFactory(cellData -> cellData.getValue().TableNoProperty());
 		// 라벨에 빈값띄우기
@@ -141,7 +148,7 @@ public class SushiController {
 		showGuestDetails(null);
 		showJumunDetails(null);
 		showStoreDetails(null);
-		// Listener로 변화 감지,테이블선택값 라벨에 값띄우기
+		// Listener로 변화 감지, 테이블선택값 라벨에 값띄우기
 		sushiTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showSushiDetails(newValue));
 		guestTable.getSelectionModel().selectedItemProperty()
@@ -152,9 +159,8 @@ public class SushiController {
 				.addListener((observable, oldValue, newValue) -> showStoreDetails(newValue));
 	}
 
-	// 참조한 메인앱 호출-->반드시 Main.java에서 호출해야지, Main을 통해 controller 접근가능
-	// SushiController controller = loader.getController();
-	// controller.setMainApp(this);
+	// 참조한 메인앱 호출
+	
 	public void setMain(Main main) {
 		this.main = main;
 		sushiTable.setItems(main.getSushiVOData());
@@ -163,6 +169,8 @@ public class SushiController {
 		storeTable.setItems(main.getStoreVOData());
 	}
 
+	///////////////////////////////////////// 창변경 버튼
+	
 	@FXML
 	public void menuFront() {
 		sushi1.toFront();
@@ -178,8 +186,8 @@ public class SushiController {
 		sushi3.toFront();
 	}
 
-	///////////////////////////////////////// 창변경 버튼
-	// 선택시 해당 스시의 정보 나오게끔한다.
+
+	// 선택 ->  스시 정보
 	public void showSushiDetails(SushiVO sushi) {
 		if (sushi != null) {
 			sushiNoLabel.setText(sushi.getSushiNo());
@@ -198,7 +206,7 @@ public class SushiController {
 		}
 	}
 
-	// 선택시 손님정보 나오게
+	// 선택 ->  손님 정보
 	public void showGuestDetails(GuestVO guest) {
 		if (guest != null) {
 			guestNoLabelg.setText(guest.getGuestNo());
@@ -210,7 +218,7 @@ public class SushiController {
 		}
 	}
 
-	// 선택시 주문정보 나오게
+	// 선택 ->  주문 정보
 	public void showJumunDetails(JumunVO jumun) {
 		if (jumun != null) {
 			jumunNoLabel.setText(jumun.getJumunNo());
@@ -227,7 +235,7 @@ public class SushiController {
 		}
 	}
 
-	// 선택시 가게정보나오게
+	// 선택 ->  가게 정보
 	public void showStoreDetails(StoreVO store) {
 		if (store != null) {
 			fishNoLabels.setText(store.getFishNo());
@@ -239,7 +247,7 @@ public class SushiController {
 	}
 
 	/////////////////////////////////////////////////////////////////////////// 버튼이벤트연결
-	// 버튼이 Sushi.fxml에 있으므로 여기서 이벤트 처리해야한다
+
 	@FXML
 	public void deleteSushi() {
 		int selectedIndex = sushiTable.getSelectionModel().getSelectedIndex();
@@ -258,20 +266,19 @@ public class SushiController {
 		if (okClicked) {
 			main.getSushiVOData().add(sushi);
 			main.printList();
-			// add가 동작하는지확인하면 스시가 추가되는지 확인해볼 수 있네
 		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////////// controller에서
 	////////////////////////////////////////////////////////////////////////////////// 이벤트
 	////////////////////////////////////////////////////////////////////////////////// 걸어주는곳
+	
 	@FXML
 	public void deleteGuest() {
 		int selectedIndex = guestTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			guestTable.getItems().remove(selectedIndex);
 			guestNoDB = guestTable.getItems().get(selectedIndex).getGuestNo();
-			//dao.deleteGuest(guestNoDB);
 		}
 	}
 
@@ -291,9 +298,7 @@ public class SushiController {
 		int selectedIndex = jumunTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			jumunNoDB = jumunTable.getItems().get(selectedIndex).getJumunNo();
-			//dao.deleteJumun(jumunNoDB);
 			jumunTable.getItems().remove(selectedIndex);
-			// main.printList();
 		}
 	}
 
@@ -314,7 +319,6 @@ public class SushiController {
 		if (selectedIndex >= 0) {
 			storeTable.getItems().remove(selectedIndex);
 			fishNoDB = storeTable.getItems().get(selectedIndex).getFishNo();
-			//dao.deleteStore(fishNoDB);
 
 		}
 	}
@@ -329,7 +333,8 @@ public class SushiController {
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////////// sushiDAO
+	//////////////////////////////////////////////////////////////////////////////////////// 
+	
 	public String tableNo;
 	public String totaltotal;
 	public String totalamount;
@@ -372,11 +377,9 @@ public class SushiController {
 					System.out.println("총 수익:"+total);
 					ccost = cost + "";
 					System.out.println("db에 들어가는 수익"+ccost);
-					//guestPriceList.get(i).setCost(ccost);
-					//guest = guestPriceList.get(i);
 				}
 			}
-			//main.getGuestVOData().set(selectedIndex, guest);// sql로 구현해서 update시켜야
+		
 			totaltotal = total+"";
 			guestDB.setGuestNo(guestnumber);
 			guestDB.setTableNo(tableNumber);
@@ -388,7 +391,6 @@ public class SushiController {
 	});
 		
 	
-		///////////////////////////////////////////////// cost 구했음+넣었음
 	}
 
 	@FXML
@@ -416,8 +418,7 @@ public class SushiController {
 		System.out.println(totaltotal);
 		
 		dao.updateSales(storeDB);
-		
-		/////////////////////////////////////////////전체매출 구하기
+
 	}
 	
 

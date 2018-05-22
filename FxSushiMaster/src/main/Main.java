@@ -84,7 +84,7 @@ public class Main extends Application {
 	}
 	
 	public Main() {
-		//초기값뺐음
+
 	}
 	
 	@Override
@@ -123,13 +123,11 @@ public class Main extends Application {
 			// 메뉴정보 가져오기
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Sushi.fxml"));
-			sushi = (AnchorPane) loader.load();////////////////////
-			// 레이아웃 위치설정
+			sushi = (AnchorPane) loader.load();
 			rootLayout.setCenter(sushi);
 			
-			//controller연결하기
 			SushiController controller = loader.getController();
-			controller.setMain(this);//fxml 씬빌더로 열어서 커트롤러 걸어주기
+			controller.setMain(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -140,20 +138,18 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/SushiDialog.fxml"));
 			sushidialog = (AnchorPane) loader.load();
-			//다이얼로그용 스테이지 그리고 그안에 들어갈 scene만들어줌
 			dialogStage = new Stage();
 			dialogStage.setTitle("Sushi Info");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(sushidialog);
 			dialogStage.setScene(scene);
-			//컨트롤러 연결하기
 			SushiDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			controller.setSushi(sushi);
-			
+
 			dialogStage.showAndWait();
-			return controller.isOkClicked();//ok되면 트루되고 창꺼짐
+			return controller.isOkClicked();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -247,11 +243,8 @@ public class Main extends Application {
 			return false;
 		}
 	}
-//////////////////////////////////////////////////////////////////
-	//추가 FXML작성할 곳
 	
-	
-/////////////////////////////////////////////////////////////////stage호출
+///////////////////////////////////////////////////////////////// stage 호출
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

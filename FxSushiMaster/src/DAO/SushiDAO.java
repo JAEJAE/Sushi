@@ -19,7 +19,16 @@ public class SushiDAO {
 	public ArrayList<GuestVO> guestList = new ArrayList<>();
 	public ArrayList<StoreVO> storeList = new ArrayList<>();
 	public ArrayList<JumunVO> jumunList = new ArrayList<>();
-
+	
+	
+	public SushiDAO() {
+		
+	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////// Insert
+	
+	
 	public void insertStore(StoreVODB store) {
 		SqlSession session = null;
 		try {
@@ -27,7 +36,6 @@ public class SushiDAO {
 			SushiMapper mapper = session.getMapper(SushiMapper.class);
 			System.out.println(store);
 			mapper.insertStore(store);
-
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,6 +44,7 @@ public class SushiDAO {
 		}
 	}
 
+	
 	public void insertSushi(SushiVODB sushi) {
 		SqlSession session = null;
 		try {
@@ -77,8 +86,8 @@ public class SushiDAO {
 			session.close();
 		}
 	}
-	////////////////////////////////////// Insert
-	//////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////// Delete
+
 
 	public void deleteJumun(String jumunNo) {
 		SqlSession session = null;
@@ -140,8 +149,9 @@ public class SushiDAO {
 		}
 	}
 
-	///////////////////////////////// delete
-	/////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////// Update
+	
+	
 	public void updateCost(GuestVODB guest) {
 		SqlSession session = null;
 		try {
@@ -157,8 +167,6 @@ public class SushiDAO {
 
 	}
 
-	/////////////////////////////////
-	////////////////////////////////
 	public void updateSales(StoreVODB store) {
 		SqlSession session = null;
 		try {
@@ -173,18 +181,5 @@ public class SushiDAO {
 		}
 	}
 
-	/////////////////////////////////
-	////////////////////////////////
-	/*
-	 * public void updateAmount(String totalamount) { SqlSession session = null; try
-	 * { session = factory.openSession(); SushiMapper mapper =
-	 * session.getMapper(SushiMapper.class); mapper.updateAmount(totalamount);
-	 * session.commit(); } catch (Exception e) { e.printStackTrace(); } finally {
-	 * session.close(); } }
-	 */
-
-	public SushiDAO() {
-
-	}
 
 }

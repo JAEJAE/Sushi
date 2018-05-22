@@ -47,11 +47,11 @@
       </GridPane>
       <ButtonBar layoutX="86.0" layoutY="146.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#handleOk3" style="-fx-background-color: #D7AC87;" text="Ok" underline="true">
+          <Button mnemonicParsing="false" onAction="#handleOk3" style="-fx-background-color: #D7AC87;" text="Create" underline="true">
                <font>
                   <Font name="D2Coding Bold" size="13.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#handleCancel3" style="-fx-background-color: #D7AC87;" text="Cancel" underline="true">
+            <Button mnemonicParsing="false" onAction="#handleCancel3" style="-fx-background-color: #D7AC87;" text="Delete" underline="true">
                <font>
                   <Font name="D2Coding Bold" size="13.0" />
                </font></Button>
